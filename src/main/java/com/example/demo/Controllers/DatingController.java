@@ -38,14 +38,16 @@ public class DatingController {
         String email = createProfileData.getParameter("pEmail");
         String description = createProfileData.getParameter("pDescription");
         String kodeord = createProfileData.getParameter("pKodeord");
-        if (rp.testUsernameViability("pEmail")){
-            rp.createProfile(name, kodeord, gender,email,description,admin);
-            return "redirect:/login";
-        } else {
-            System.out.println("fejl");
-           return "redirect:/";
+
+            if (rp.testUsernameViability("pEmail")) {
+                rp.createProfile(name, kodeord, gender, email, description, admin);
+                System.out.println("laver profil");
+            } else {
+                System.out.println("fejl");
+                return "errorcreate";
+            }
+            return "login";
         }
-    }
 
     @PostMapping("/correctlogin")
     public String login(WebRequest loginData)  throws SQLException{
@@ -79,22 +81,17 @@ public class DatingController {
     @PostMapping("/editprofile")
     public String editProfile(WebRequest editProfile) {
         try {
-            String gender = null;
             int id = Integer.parseInt(editProfile.getParameter("eId"));
             String name = editProfile.getParameter("eName");
-            //String gender = editProfile.getParameter("eGender");
-            if (editProfile.getParameter("pGender") == editProfile.getParameter("pGenderMand")) {
-                gender = "Mand";
-            } else {
-                gender = "Kvinde";
-            }
+            String gender = editProfile.getParameter("eGender");
             String email = editProfile.getParameter("eEmail");
             String description = editProfile.getParameter("eDescription");
             rp.editProfile(id,name,gender,email,description);
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/";
+        return "redirect:/profile";
     }
 
     // Search Profiles
