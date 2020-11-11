@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:insert="fragments/header :: header"></div>
+    <div th:insert="fragments/menuloggedin :: menuloggedin"></div>
+
+    <title>KEA Dating - Om os</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+
+<div th:insert="fragments/jumbotron :: jumbotron">
+</div>
+
+    <div class="container" id="main">
+
+        <div class="row">
+
+            <div class="col" id="profileList">
+                <h2>Profiles</h2>
+                <div th:each="allProfiles : ${profileList}">
+                    <div>
+                        <form action="/profileId" method="post">
+                            <p th:text="${allProfiles.getName()}"></p><br>
+                            <p th:text="${allProfiles.getKodeord()}"></p><br>
+                            <p th:text="${allProfiles.getEmail()}"></p><br>
+                            <p th:text="${allProfiles.getGender()}"></p><br>
+                            <p th:text="${allProfiles.Description()}"></p><br>
+
+
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <br>
+<hr>
+
+</body>
+<div th:insert="fragments/footer :: footer"></div>
+</html>

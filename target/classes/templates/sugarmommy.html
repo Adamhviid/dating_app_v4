@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <div th:insert="fragments/header :: header"></div>
     <div th:insert="fragments/menu :: menu"></div>
 
-    <title>KEA Dating - Profile</title>
+    <title>KEA Dating - Sugar Mommy</title>
     <meta charset="UTF-8">
 </head>
 
@@ -20,23 +19,39 @@
     <!-- Indsæt indhold her -->
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
+                <div class="simple-text"><h2>♥︎ Bliv til en SUGAR MOMMY ♥︎</h2></div>
+                <p class="parag1" title="">
+                    Har du ikke nogensinde drømt om at støtte en studerende på SU som en veletableret og moden dame?
+                    Her får du mulighed for at date og sponsorere den KEA studerende, som du kommer til at matche med
+                    på vores app :)
+                    <br><br>
+                    <b>Fordele:</b> du kan få god samvittighed over tanken om at hjælpe en studerende på vej mod ens drømmejob.
+                    Din modenhed kan give din studerende partner både psykologisk og material tryghed, samt en masse kærlighed
+                    og god sex med al din erfaring og din partners energi og friskhed :)))
+                    <br><br>
+                    <a href="/"><b>Tilmed dig</b></a> i dag og tegn vores specielle abonnement som "Sugar Mommy" til en helt fornuftig pris!
+                    <br><br>
+                    God fornøjelse!
+                    <br><br>
+                    ♥︎ KEA Dating Teamet ♥︎
+                </p>
+                <br><br>
+                <div id="form-container">
+                    <form id="toMainPage" action="/" method="get">
+                        <button class="btn btn-primary" type="submit"><-- Tilbage</button>
+                    </form>
+                </div>
 
-            <div id="form-container">
-                <h2>Profiler</h2>
-                <tr th:each="profile : ${profile}">
-                    <td th:text="${profile.name}" /><br>
-                    <td th:text="${profile.gender}" /><br>
-                    <td th:text="${profile.description}" /><br><br>
-                </tr>
             </div>
 
             <br><br>
 
-            <form id="toMainPage" action="/" method="get">
-                <button class="btn btn-primary" type="submit"><-- Tilbage</button>
-            </form>
-        </div>
+            <div class="col-md-6">
+                <div class="simple-text"><h2>&ensp;</h2></div>
+                    <p class="parag2"><img src="images/members_photos/Member_07.jpg" width="78%" height="auto" alt="Zentai costume image">
+                    <br><br></p>
+            </div>
     </div>
 </div> <!-- /container -->
 <br>

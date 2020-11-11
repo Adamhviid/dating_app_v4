@@ -4,7 +4,7 @@
 
 <head>
     <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/menu :: menu"></div>
+    <div th:insert="fragments/menuloggedin :: menuloggedin"></div>
 
     <title>KEA Dating - Main!</title>
     <meta charset="UTF-8">
@@ -26,10 +26,10 @@
             <div th:each="allProfiles : ${profileList}">
                 <div>
                     <form action="/profileId" method="post">
-                    <!--- kodeord og gender er modsat hinanden, nød til at skrive kodeord, for at få gender -->
+                    <!--- kodeord og gender er modsat hinanden, nød til at skrive kodeord, for at få gender og email for at få description -->
                     <p th:text="${allProfiles.getName()}"></p>
                     <p th:text="${allProfiles.getKodeord()}"></a>
-                    <p th:text="${allProfiles.getDescription()}"></p><br>
+                    <p th:text="${allProfiles.getEmail()}"></p><br>
                     <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="profileId">Søg nu</button>
                 </form>
             </div>
@@ -41,8 +41,8 @@
                 <h2>Søg profiler efter køn</h2>
                 <form action="/main" method="get" enctype="multipart/form-data">
                     <div class="form-group">
-                        <input type="radio" name="pGender" value="pGenderMand"> Mand
-                        <input type="radio" name="pGender" value="pGenderKvinde"> Kvinde<br>
+                        <input type="radio" name="pGender" value="Mand"> Mand
+                        <input type="radio" name="pGender" value="Kvinde"> Kvinde<br>
                     </div>
                     <button class="btn btn-primary" type="submit">Søg nu</button>
                 </form>

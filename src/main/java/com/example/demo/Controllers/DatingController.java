@@ -116,6 +116,11 @@ public class DatingController {
         return "login";
     }
 
+    //myprofile
+    @GetMapping("/myprofile")
+    public String myprofile() {
+        return "myprofile";
+    }
 
     //Admin
     @GetMapping("/admin")
