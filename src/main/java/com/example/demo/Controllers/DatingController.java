@@ -39,13 +39,15 @@ public class DatingController {
         String description = createProfileData.getParameter("pDescription");
         String kodeord = createProfileData.getParameter("pKodeord");
 
-            if (rp.testUsernameViability("pEmail")) {
-                rp.createProfile(name, kodeord, gender, email, description, admin);
+        rp.createProfile(name, kodeord, gender, email, description, admin);
+
+          /*  if (rp.testUsernameViability("pEmail")) {
+
                 System.out.println("laver profil");
             } else {
                 System.out.println("fejl");
                 return "errorcreate";
-            }
+            */
             return "login";
         }
 
@@ -81,7 +83,8 @@ public class DatingController {
     @PostMapping("/editprofile")
     public String editProfile(WebRequest editProfile) {
         try {
-            int id = Integer.parseInt(editProfile.getParameter("eId"));
+            int id = currentLogin.getId();
+            //int id = Integer.parseInt(editProfile.getParameter("eId"));
             String name = editProfile.getParameter("eName");
             String gender = editProfile.getParameter("eGender");
             String email = editProfile.getParameter("eEmail");
@@ -91,7 +94,7 @@ public class DatingController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/profile";
+        return "redirect:/myprofile";
     }
 
     // Search Profiles
@@ -115,9 +118,12 @@ public class DatingController {
 
     //myprofile
     @GetMapping("/myprofile")
-    public String myprofile() {
+    public String myprofile(Model myprofileModel) throws SQLException {
+        int id = currentLogin.getId();
+        myprofileModel.addAttribute("profileID",rp.profile(id));
         return "myprofile";
     }
+
 
     //Admin
     @GetMapping("/admin")
