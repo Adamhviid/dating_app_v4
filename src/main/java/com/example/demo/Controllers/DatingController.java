@@ -92,7 +92,7 @@ public class DatingController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/profile";
+        return "redirect:/myprofile";
     }
 
     // Search Profiles

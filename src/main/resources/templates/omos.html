@@ -2,40 +2,65 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <div th:insert="fragments/header :: header"></div>
+    <div th:insert="fragments/menu :: menu"></div>
+
+    <title>KEA Dating - Om os</title>
     <meta charset="UTF-8">
-    <title>KEA Dating - Om Os</title>
 </head>
 
 <body>
-<div th:insert="fragments/header :: header"></div>
-<div th:insert="fragments/menu :: menu"></div>
-<div th:insert="fragments/jumbotron :: jumbotron"></div>
+
+<div th:insert="fragments/jumbotron :: jumbotron">
+</div>
 
 <div class="container" id="main">
 
     <!-- Indsæt indhold her -->
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-6">
 
-            <div id="form-container">
-                <h2>Profiler</h2>
-                <tr th:each="profile : ${profile}">
-                    <td th:text="${profile.name}" /><br>
-                    <td th:text="${profile.gender}" /><br>
-                    <td th:text="${profile.description}" /><br><br>
-                </tr>
-            </div>
-
+                <div class="simple-text"><h2>Om os</h2>
+                <p class="parag1" title="">
+                    Vi er en gruppe datamatiker studerende på Københavns Erhvervsakademi (KEA), på Lygten 37,
+                    København NV. <br><br>
+                    Da vi i november 2020 fik studieopgaven om at skabe en dating app af vores
+                    lærere, kom vi i tanke om Mark Zuckerberg, der oprindeligt havde udviklet en app for at lave en
+                    slags årsbog med alle studerendes navn og profilbillede, og for at lure lidt på andre studerende,
+                    især de ledige kvindelige studerende på hans skole. Hans webapplikation blev senere til den
+                    verdenskendte sociale platform, internettets kæmpehit: Facebook.<br><br>
+                    En dating app for at bringe folk sammen om kærlighed. For os kom ordet kærlighed til at lyde som
+                    KEA-lighed. Sådan kom vi i gang med et sjovt koncept til vores dating app, med sin helt egen
+                    personlighed med branding, logo, banner, farveskema, skrifttype, og ikke mindst lidt humor,
+                    selvom den nu kun er bygget som en MVP (Minimum Viable Product).
+                    <br><br>
+                    God fornøjelse!
+                    <br><br>
+                    Jesper, Adam, Anton, Peter, Jean
+                </p>
+                </div>
             <br><br>
+                <div id="form-container">
+                        <form id="toMainPage" action="/" method="get">
+                        <button class="btn btn-primary" type="submit"><-- Tilbage</button>
+                        </form>
 
-            <form id="toMainPage" action="/" method="get">
-                <button class="btn btn-primary" type="submit"><-- Tilbage</button>
-            </form>
+                </div>
+        </div>
+        
+        <br><br>
+        
+        <div class="col-md-6">
+            <div class="simple-text"><h2>&ensp;</h2>
+                <p class="parag2"><img src="images/members_photos/Member_02.jpg" width="102%" height="auto" alt="Zentai costume image">
+                <br><br></p>
+            </div>
         </div>
     </div>
 </div> <!-- /container -->
-
-<div th:insert="fragments/footer :: footer"></div>
+<br>
+<hr>
 </body>
+<div th:insert="fragments/footer :: footer"></div>
 </html>

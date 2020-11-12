@@ -20,7 +20,7 @@ public class ProfileRepository {
 
     //Denne metode laver forbindelsen til mysql databasen
     public Connection establishConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://localhost:3306/dating_app?serverTimezone=UTC", "peter", "1");
+        return DriverManager.getConnection("jdbc:mysql://localhost:3306/dating_app?serverTimezone=UTC", "root", "Orange10");
         //standard: user=root, password=1
     }
     //Metode i stedet for dupliceret kode
