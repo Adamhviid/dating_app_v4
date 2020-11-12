@@ -2,17 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/menuloggedin :: menuloggedin"></div>
-
-    <title>KEA Dating - Om os</title>
+    <title>Min Profil</title>
     <meta charset="UTF-8">
 </head>
 
 <body>
-
-<div th:insert="fragments/jumbotron :: jumbotron">
-</div>
+<div th:insert="fragments/header :: header"></div>
+<div th:insert="fragments/menuloggedin :: menuloggedin"></div>
+<div th:insert="fragments/jumbotron :: jumbotron"></div>
 
     <div class="container" id="main">
 
@@ -20,22 +17,18 @@
 
             <div class="col-lg-6">
 
-
                 <div class="col" id="profileID">
                 <h2>Min profil</h2>
                     <div>
-                            <tr th:each="profile : ${profileID}">
-                                <td th:text="${profile.name}" /><br>
-                                <td th:text="${profile.kodeord}" /><br>
-                                <td th:text="${profile.gender}" /><br>
-                                <td th:text="${profile.email}" /><br>
-                                <td th:text="${profile.description}" /><br><br>
-                            </tr>
-
-
+                        <tr th:each="profile : ${profileID}">
+                            <td th:text="${profile.name}" /><br>
+                            <td th:text="${profile.kodeord}" /><br>
+                            <td th:text="${profile.gender}" /><br>
+                            <td th:text="${profile.email}" /><br>
+                            <td th:text="${profile.description}" /><br><br>
+                        </tr>
+                    </div>
                 </div>
-                </div>
-
 
                 <div id="edit-container">
                     <h2>Ret profil</h2>
@@ -49,19 +42,14 @@
                             <input type="text" id="eDescription" name="eDescription" placeholder="Ændre beskrivelse..."><br><br>
                         </div>
                         <button class="btn btn-primary" type="submit">Gem profil</button>
-                        </form>
+                    </form>
                 </div>
-
 
             </div>
         </div>
     </div>
-    </div>
 
 
-        <br>
-<hr>
-
-</body>
 <div th:insert="fragments/footer :: footer"></div>
+</body>
 </html>

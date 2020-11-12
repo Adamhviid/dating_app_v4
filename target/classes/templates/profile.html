@@ -34,6 +34,9 @@
                     <h4 th:text="${allProfiles.getDescription()}"></h4>
                     <h4 th:text="${allProfiles.getAdmin()}"></h4>
                 </div>
+                <form action="/addtokandidat" method="post">
+                <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="addToKandidat">Tilføj til favoritter</button>
+                </form>
 
 
 

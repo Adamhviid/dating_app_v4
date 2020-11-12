@@ -9,8 +9,9 @@ public class Profile {
     private String email;
     private String description;
     private int admin;
+    private String candidatelist;
 
-    public Profile(int id, String name, String kodeord, String gender, String email, String description, int admin) {
+    public Profile(int id, String name, String kodeord, String gender, String email, String description, int admin, String candidatelist) {
         this.id = id;
         this.name = name;
         this.kodeord = kodeord;
@@ -19,6 +20,7 @@ public class Profile {
         this.description = description;
         this.admin = admin;
         //this.picture = picture;
+        this.candidatelist = candidatelist;
     }
 
     @Override
@@ -73,21 +75,29 @@ public class Profile {
     public void setDescription(String description) {
         this.description = description;
     }
-/*
-    public String getPicture() {
-        return picture;
-    }
+    /*
+        public String getPicture() {
+            return picture;
+        }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
- */
+        public void setPicture(String picture) {
+            this.picture = picture;
+        }
+     */
     public int getAdmin() {
         return admin;
     }
 
     public void setAdmin(int admin) {
         this.admin = admin;
+    }
+
+    public String getCandidatelist() {
+        return candidatelist;
+    }
+
+    public void setCandidatelist(String candidatelist) {
+        this.candidatelist = candidatelist;
     }
 }
 

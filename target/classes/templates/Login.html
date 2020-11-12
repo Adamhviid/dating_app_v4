@@ -1,17 +1,15 @@
-
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<title>Login</title>
-
-<div th:insert="fragments/header :: header"></div>
-
-<div th:insert="fragments/menu :: menu"></div>
+<head>
+    <title>Log In</title>
+    <meta charset="UTF-8">
+</head>
 
 <body>
-
-<div th:insert="fragments/jumbotron :: jumbotron">
-</div>
+<div th:insert="fragments/header :: header"></div>
+<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="fragments/jumbotron :: jumbotron"></div>
 
 <div class="container">
 
@@ -42,7 +40,6 @@
 </div> <!-- /container -->
 <br>
 <hr>
-</body>
 <div th:insert="fragments/footer :: footer"></div>
-
+</body>
 </html>

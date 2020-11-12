@@ -1,41 +1,53 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/menuloggedin :: menuloggedin"></div>
-
     <title>KEA Dating - Main!</title>
     <meta charset="UTF-8">
 </head>
 
 <body>
-
-<div th:insert="fragments/jumbotron :: jumbotron">
-</div>
-
+<div th:insert="fragments/header :: header"></div>
+<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="fragments/jumbotron :: jumbotron"></div>
 
 <div class="container" id="main">
 
     <!-- Indsæt indhold her -->
     <div class="row">
 
+        <!-- profil liste -->
         <div class="col" id="profileList">
             <h2>Profiles</h2>
-            <div th:each="allProfiles : ${profileList}">
-                <div>
+                <div th:each="allProfiles : ${profileList}">
+                    <div>
                     <form action="/profileId" method="post">
-                    <!--- kodeord og gender er modsat hinanden, nød til at skrive kodeord, for at få gender og email for at få description -->
+                    <!--- kodeord og gender er modsat hinanden, nød til at skrive kodeord, for at få gender -->
                     <p th:text="${allProfiles.getName()}"></p>
-                    <p th:text="${allProfiles.getKodeord()}"></a>
-                    <p th:text="${allProfiles.getEmail()}"></p><br>
-                    <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="profileId">Søg nu</button>
-                </form>
+                    <p th:text="${allProfiles.getKodeord()}"></p>
+                    <p th:text="${allProfiles.getDescription()}"></p>
+                    <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="profileId">Se profil</button><br>
+                    </form>
+                </div>
             </div>
+
+            <!-- kandidat liste -->
+        <div id="candidateList">
+            <h2>Kandidater</h2>
+                <div th:each="allCandidates : ${candidateList}">
+                    <div>
+                        <!--- kodeord og gender er modsat hinanden, nød til at skrive kodeord, for at få gender -->
+                        <p th:text="${allCandidates.getName()}"></p>
+                        <p th:text="${allCandidates.getKodeord()}"></p>
+                        <p th:text="${allCandidates.getDescription()}"></p>
+                        <button class="btn btn-primary" type="submit" th:value="${allCandidates.getId()}" name="profileId">Se profil</button><br>
+                    </div>
+                </div>
             </div>
+
         </div>
 
+        <!-- søg profiler efter køn knap -->
         <div class="col-md-6">
             <div id="form-container">
                 <h2>Søg profiler efter køn</h2>
@@ -49,26 +61,28 @@
 
             </div>
 
+            <!-- se kandidatliste -->
+            <div>
+                <form action="/maincandidate" method="post">
+                <button class="btn btn-primary" type="submit" name="candidate">Se dine kandidater</button>
+                </form>
+            </div>
+
 
             <br><br>
-
-            <form id="toMainPage" action="/" method="get">
-                <button class="btn btn-primary" type="submit"><-- Tilbage</button>
-            </form>
         </div>
     </div>
 </div> <!-- /container -->
 <br>
-<hr>
 
+    <!--
     <div id="profileSite-container">
         <form id="profileSite" action="/getProfile" method="post">
             <input type="submit" id="profileSubmit-form" value="Bruger profil!!">
         </form>
     </div>
+    -->
 
-
-</body>
 <div th:insert="fragments/footer :: footer"></div>
-
+</body>
 </html>

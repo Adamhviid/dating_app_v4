@@ -17,10 +17,8 @@ public class DatingController {
 
     ProfileRepository rp = new ProfileRepository();
     List<Profile> allProfiles = new ArrayList<>();
-    List<Profile> searchLogin = new ArrayList<>();
-    Profile currentLogin = new Profile(0,null,null,null,null,null,0);
-    // Profile profile = new Profile(0,null,null,null,null,null, 0, null);
-
+    List<Profile> allCandidates = new ArrayList<>();
+    Profile currentLogin = new Profile(0,null,null,null,null,null,0,null);
 
     // Root
     @GetMapping("/")
@@ -38,22 +36,22 @@ public class DatingController {
         String email = createProfileData.getParameter("pEmail");
         String description = createProfileData.getParameter("pDescription");
         String kodeord = createProfileData.getParameter("pKodeord");
-
         rp.createProfile(name, kodeord, gender, email, description, admin);
-
-          /*  if (rp.testUsernameViability("pEmail")) {
-
+/*          //virker ikke :(
+            if (rp.testUsernameViability("pEmail")) {
+                rp.createProfile(name, kodeord, gender, email, description, admin);
                 System.out.println("laver profil");
             } else {
                 System.out.println("fejl");
                 return "errorcreate";
-            */
-            return "login";
-        }
+            }
+
+ */
+        return "login";
+    }
 
     @PostMapping("/correctlogin")
     public String login(WebRequest loginData)  throws SQLException{
-
         String email = loginData.getParameter("pEmail");
         String kodeord = loginData.getParameter("pKodeord");
         allProfiles = rp.searchLogin(email,kodeord);
@@ -94,7 +92,7 @@ public class DatingController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/myprofile";
+        return "redirect:/profile";
     }
 
     // Search Profiles
@@ -110,10 +108,11 @@ public class DatingController {
         return "main";
     }
 
-    //Login
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+    @PostMapping("/maincandidate")
+    public String searchCandidates(Model candidateModel) throws SQLException {
+        allCandidates = rp.candidateList(currentLogin.getId());
+        candidateModel.addAttribute("candidateList",allCandidates);
+        return "main";
     }
 
     //myprofile
@@ -124,29 +123,10 @@ public class DatingController {
         return "myprofile";
     }
 
-
-    //Admin
-    @GetMapping("/admin")
-    public String admin(Model model) {
-        return "admin";
-    }
-
-    //Om os
-    @GetMapping("/omos")
-    public String omos(Model model) {
-        return "omos";
-    }
-
-    //Sugar Mommy
-    @GetMapping("/sugarmommy")
-    public String sugarmommy(Model model) {
-        return "sugarmommy";
-    }
-
-    //Sugar Daddy
-    @GetMapping("/sugardaddy")
-    public String sugardaddy(Model model) {
-        return "sugardaddy";
+    //Login
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 
     @GetMapping("/profile")
@@ -168,12 +148,42 @@ public class DatingController {
             System.out.println("hov");
         }
 
-        if ( currentLogin.getId()==Integer.parseInt(id)) {
-
-        }
-
         return "redirect:/profile";
     }
+
+    @PostMapping("/addtokandidat")
+    public String kandidatList(WebRequest kandidatButton) throws SQLException {
+        String candidateId = kandidatButton.getParameter("addToKandidat");
+        int currentId = currentLogin.getId();
+        rp.addCandidate(candidateId,currentId);
+        System.out.println("Hej");
+        return "redirect:/profile";
+    }
+
+    //Admin
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
+
+    //Om os
+    @GetMapping("/omos")
+    public String omos() {
+        return "omos";
+    }
+
+    //Sugar Mommy
+    @GetMapping("/sugarmommy")
+    public String sugarmommy() {
+        return "sugarmommy";
+    }
+
+    //Sugar Daddy
+    @GetMapping("/sugardaddy")
+    public String sugardaddy() {
+        return "sugardaddy";
+    }
+
 }
 
 

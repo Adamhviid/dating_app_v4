@@ -174,3 +174,7 @@ a:hover {
     background: #125688;
     color: white;
 }
+#profileList {
+    border: #333333;
+    width: 0.5px;
+}

@@ -1,17 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <div th:insert="fragments/header :: header"></div>
-    <div th:insert="fragments/menu :: menu"></div>
-
+    <meta charset="UTF-8">
     <title>KEA Dating - Velkommen!</title>
 </head>
 
-
 <body>
-
+<div th:insert="fragments/header :: header"></div>
+<div th:insert="fragments/menu :: menu"></div>
 <div th:insert="fragments/jumbotron :: jumbotron"></div>
 
 <div class="container" id="main">
@@ -66,7 +63,7 @@
 
         <div class="col-lg-6">
             <h1> </h1>
-            <p><img src="images/members_grid_web.jpg" width="150%" height="auto">
+            <p><img src="../static/images/members_grid_web.jpg" width="150%" height="auto" alt="members-picture">
                 <br><br></p>
 
             <h2>Profiler</h2>
@@ -81,9 +78,7 @@
         </div>
     </div>
 </div> <!-- /container -->
-<br>
-<hr>
-</body>
-<div th:insert="fragments/footer :: footer"></div>
 
+<div th:insert="fragments/footer :: footer"></div>
+</body>
 </html>
