@@ -55,7 +55,8 @@
         <div th:each="allProfiles : ${profileList}">
             <form action="/sendmessage" method="post">
                 <label for="msg">Send en besked ;)</label><br>
-                <input type="text" id="msg" name="getMessage" placeholder="Skriv besked..." required><br>
+                <textarea typ="text" rows="5" id="msg" name="getMessage" placeholder="Skriv besked..." required></textarea><br>
+<!--                <input type="text" id="msg" name="getMessage" placeholder="Skriv besked..." required><br>-->
                 <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="getReceiverId">Send</button>
             </form>
         </div>

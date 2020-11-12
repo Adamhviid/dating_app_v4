@@ -47,11 +47,11 @@ public class DatingController {
                 System.out.println("fejl");
                 return "errorcreate";
             }
-
  */
         return "login";
     }
 
+    //log in controller
     @PostMapping("/correctlogin")
     public String login(WebRequest loginData)  throws SQLException{
         String email = loginData.getParameter("pEmail");
@@ -60,6 +60,10 @@ public class DatingController {
 
         try {
             currentLogin = allProfiles.get(0);
+            if(currentLogin.getAdmin()==1){
+                System.out.println("hej");
+                return "redirect:/adminPage";
+            }
             System.out.println("logged in as " + allProfiles.get(0).toString());
         } catch (IndexOutOfBoundsException e) {
             return "errorlogin";
@@ -67,16 +71,35 @@ public class DatingController {
         return "main";
     }
 
-    // Delete Profile
+    //admin page
+    @GetMapping("/adminPage")
+    public String admin(Model m) throws SQLException{
+        allProfiles = rp.listAllProfiles();
+        m.addAttribute("allProfiles", allProfiles);
+        return "adminPage";
+    }
+    // Delete Profile gammel metode
+//    @PostMapping("/deleteprofile")
+//    public String deleteProfile(WebRequest deleteProfile) {
+//        try {
+//            int id = Integer.parseInt(deleteProfile.getParameter("delete"));
+//            rp.deleteProfile(id);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//        return "redirect:/";
+//    }
+
+    //delete profil ny metode
     @PostMapping("/deleteprofile")
     public String deleteProfile(WebRequest deleteProfile) {
         try {
-            int id = Integer.parseInt(deleteProfile.getParameter("delete"));
-            rp.deleteProfile(id);
+            String id = deleteProfile.getParameter("delete-admin");
+            rp.deleteProfile(Integer.parseInt(id));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/";
+        return "redirect:/adminPage";
     }
 
     // Edit Profile
@@ -94,7 +117,7 @@ public class DatingController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/profile";
+        return "redirect:/myprofile";
     }
 
     // Search Profiles
