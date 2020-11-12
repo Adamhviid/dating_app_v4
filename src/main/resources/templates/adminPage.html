@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+<div th:insert="fragments/header :: header"></div>
+<div th:insert="fragments/menu :: menu"></div>
+<div th:insert="fragments/jumbotron :: jumbotron"></div>
+
+<h2>Profiler</h2>
+<div th:each="allProfiles : ${allProfiles}">
+    <form action="/deleteprofile" method="post">
+        <p th:text="${allProfiles.getId()}"></p><br>
+        <p th:text="${allProfiles.getName()}"></p>
+        <p th:text="${allProfiles.getKodeord()}"></p>
+        <p th:text="${allProfiles.getDescription()}"></p>
+        <button class="btn btn-primary" type="submit" th:value="${allProfiles.getId()}" name="delete-admin" >Slet profil</button><br>
+    </form>
+</div>
+<!--th:value="${allProfiles.getId()}"-->
+
+<!--<form id="delete-form" action="/deleteprofile" method="post">-->
+<!--    <div class="form-group">-->
+<!--        <input type="text" id="delete" name="delete" placeholder="Vælg bruger ID..."><br><br>-->
+<!--    </div>-->
+<!--    <button class="btn btn-primary" type="submit">Slet profil</button>-->
+<!--</form>-->
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>

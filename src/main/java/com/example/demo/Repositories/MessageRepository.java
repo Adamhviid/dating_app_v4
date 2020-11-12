@@ -14,10 +14,10 @@ public class MessageRepository {
     ProfileRepository rp = new ProfileRepository();
     List<Message> allMessages = new ArrayList<>();
 
-    public void sendMessage(int senderId, int recieverId, String message) throws SQLException {
-        PreparedStatement ps = rp.establishConnection().prepareStatement("INSERT INTO messages(senderId,recieverId,message) VALUES(?,?,?)");
+    public void sendMessage(int senderId, int receiverId, String message) throws SQLException {
+        PreparedStatement ps = rp.establishConnection().prepareStatement("INSERT INTO messages(senderId,receiverId,msg) VALUES(?,?,?)");
         ps.setInt(1,senderId);
-        ps.setInt(2,recieverId);
+        ps.setInt(2,receiverId);
         ps.setString(3,message);
 
         ps.executeUpdate();

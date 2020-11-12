@@ -1,6 +1,7 @@
 package com.example.demo.Controllers;
 
 import com.example.demo.Models.Profile;
+import com.example.demo.Repositories.MessageRepository;
 import com.example.demo.Repositories.ProfileRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import java.util.List;
 public class DatingController {
 
     ProfileRepository rp = new ProfileRepository();
+    MessageRepository mp = new MessageRepository();
     List<Profile> allProfiles = new ArrayList<>();
     List<Profile> allCandidates = new ArrayList<>();
     Profile currentLogin = new Profile(0,null,null,null,null,null,0,null);
@@ -45,11 +47,11 @@ public class DatingController {
                 System.out.println("fejl");
                 return "errorcreate";
             }
-
  */
         return "login";
     }
 
+    //log in controller
     @PostMapping("/correctlogin")
     public String login(WebRequest loginData)  throws SQLException{
         String email = loginData.getParameter("pEmail");
@@ -58,6 +60,10 @@ public class DatingController {
 
         try {
             currentLogin = allProfiles.get(0);
+            if(currentLogin.getAdmin()==1){
+                System.out.println("hej");
+                return "redirect:/adminPage";
+            }
             System.out.println("logged in as " + allProfiles.get(0).toString());
         } catch (IndexOutOfBoundsException e) {
             return "errorlogin";
@@ -65,16 +71,35 @@ public class DatingController {
         return "main";
     }
 
-    // Delete Profile
+    //admin page
+    @GetMapping("/adminPage")
+    public String admin(Model m) throws SQLException{
+        allProfiles = rp.listAllProfiles();
+        m.addAttribute("allProfiles", allProfiles);
+        return "adminPage";
+    }
+    // Delete Profile gammel metode
+//    @PostMapping("/deleteprofile")
+//    public String deleteProfile(WebRequest deleteProfile) {
+//        try {
+//            int id = Integer.parseInt(deleteProfile.getParameter("delete"));
+//            rp.deleteProfile(id);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//        return "redirect:/";
+//    }
+
+    //delete profil ny metode
     @PostMapping("/deleteprofile")
     public String deleteProfile(WebRequest deleteProfile) {
         try {
-            int id = Integer.parseInt(deleteProfile.getParameter("delete"));
-            rp.deleteProfile(id);
+            String id = deleteProfile.getParameter("delete-admin");
+            rp.deleteProfile(Integer.parseInt(id));
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return "redirect:/";
+        return "redirect:/adminPage";
     }
 
     // Edit Profile
@@ -184,6 +209,15 @@ public class DatingController {
         return "sugardaddy";
     }
 
+    //Send message
+    @PostMapping("/sendmessage")
+    public String sendMessage(WebRequest receiverBtn, WebRequest messageInput) throws SQLException{
+        int receiverId = Integer.parseInt(receiverBtn.getParameter("getReceiverId"));
+        String msg = messageInput.getParameter("getMessage");
+        mp.sendMessage(currentLogin.getId(),receiverId,msg);
+        System.out.println(receiverId + ", " + msg);
+        return "redirect:/profile";
+    }
 }
 
 
